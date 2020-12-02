@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <getopt.h>
 
-#include "bitcoin.h"
+#include "credit.h"
 #include "db.h"
 
 using namespace std;
