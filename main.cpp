@@ -363,11 +363,6 @@ extern "C" void* ThreadDumper(void*) {
       FILE *ff = fopen("dnsstats.log", "a");
       fprintf(ff, "%llu %g %g %g %g %g\n", (unsigned long long)(time(NULL)), stat[0], stat[1], stat[2], stat[3], stat[4]);
       fclose(ff);
-      FILE *fs = fopen("nodestats.csv", "a");
-      CAddrDbStats stats;
-      db.GetStats(stats);
-      fprintf(fs, "%llu %i\n", (unsigned long long)(time(NULL)), stats.nGood);
-      fclose(fs);
     }
   } while(1);
   return nullptr;
@@ -397,7 +392,6 @@ extern "C" void* ThreadStats(void*) {
       queries += dnsThread[i]->dbQueries;
     }
     printf("%s %i/%i available (%i tried in %is, %i new, %i active), %i banned; %llu DNS requests, %llu db queries", c, stats.nGood, stats.nAvail, stats.nTracked, stats.nAge, stats.nNew, stats.nAvail - stats.nTracked - stats.nNew, stats.nBanned, (unsigned long long)requests, (unsigned long long)queries);
-    printf("\n");
     Sleep(1000);
   } while(1);
   return nullptr;
